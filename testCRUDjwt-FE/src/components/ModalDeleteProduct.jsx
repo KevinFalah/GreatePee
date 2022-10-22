@@ -6,7 +6,15 @@ export default function ModalDeleteProduct({ show, handleClose, idData, setFetch
 
     const handleDelete = async (idData) => {
         try{
-            const response = await API.delete(`/product/${idData}`)
+
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization : `Bearer ${localStorage.token}`,
+                },
+            };
+
+            const response = await API.delete(`/product/${idData}`, config)
             setFetchStatus(true)
             handleClose();
         }catch (err) {
